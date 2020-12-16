@@ -1,9 +1,9 @@
-# Project Name
+# RocketChat Bot
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-Project Description
+This is a test instance for developing a chat bot with the Rocket.Chat SDK.
 
 ## Live Version
 
