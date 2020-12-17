@@ -19,13 +19,14 @@
     "typescript"
   ],
   "author": "Nicholas Carrigan",
-  "license": "Hippocratic",
+  "license": "AGPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/nhcarrigan/rocketchat-bot/issues"
   },
   "homepage": "https://github.com/nhcarrigan/rocketchat-bot#readme",
   "dependencies": {
-    "@rocket.chat/sdk": "^0.2.9-2"
+    "@rocket.chat/sdk": "^0.2.9-2",
+    "dotenv": "^8.2.0"
   },
   "lint-staged": {
     "*.ts": [
