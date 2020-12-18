@@ -4,4 +4,5 @@ export interface BotInt {
   botToken: string;
   hostPath: string;
   logChannel: string;
+  prefix: string;
 }

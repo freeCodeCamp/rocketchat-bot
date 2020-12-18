@@ -21,6 +21,7 @@ You'll need to set up a few environment variables. Copy the `sample.env` file to
 - `BOTNAME`: The bot's name, used in the online notification message.
 - `ROLE_LIST`: This is a comma separated list of moderator roles (used to confirm a user has the correct access to use moderation commands). Example: `"admin,leader,moderator"`.
 - `LOG_CHANNEL`: The name of the channel where the bot should log moderation activity.
+- `PREFIX`: The string to call bot commands with. Messages that do not start with this string will be ignored.
 
 ## Running the Bot
 
