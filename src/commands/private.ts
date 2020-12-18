@@ -9,10 +9,16 @@ export const priv: CommandInt = {
   name: "private",
   description: "Creates a private room with a user and the moderator team",
   command: async (message, room, BOT) => {
+    /**
+     * While this should not be possible (it is confirmed
+     * in the command handler), return early if the message does
+     * not have a user author to make TypeScript happy.
+     */
     if (!message.u) {
       await driver.sendToRoom("Oops I broke it.", room);
       return;
     }
+
     const modCheck = await isModerator(message.u.username, BOT);
 
     if (!modCheck) {

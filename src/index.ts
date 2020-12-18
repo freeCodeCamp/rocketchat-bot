@@ -19,15 +19,19 @@ export const BOT: BotInt = {
   hostPath: HOST,
   logChannel: LOG_CHANNEL || "",
   prefix: process.env.PREFIX || "!bot",
+  modRoles: process.env.ROLE_LIST?.split(",") || ["none"],
 };
 
-const runbot = async () => {
+/**
+ * The primary driver to run the bot.
+ */
+const runBot = async () => {
   // Connect to server, log in.
   await driver.connect({ host: HOST, useSsl: false });
   BOT.botId = await driver.login({ username: USER, password: PASS });
 
   // Auth to REST API
-  const apiAuthRequest = await api.login({ username: USER, password: PASS });
+  await api.login({ username: USER, password: PASS });
 
   // Join configured rooms.
   await driver.joinRooms(ROOMS);
@@ -37,7 +41,7 @@ const runbot = async () => {
   const subscribed = await driver.subscribeToMessages();
   console.log(subscribed);
 
-  // connect processMessages callback
+  // Pass received messages to command handler
   await driver.reactToMessages(CommandHandler);
   console.log("connected and waiting for messages");
 
@@ -46,4 +50,4 @@ const runbot = async () => {
   console.log("Greeting message sent.");
 };
 
-runbot();
+runBot();
