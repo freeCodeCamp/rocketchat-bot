@@ -1,5 +1,4 @@
-import { driver } from "@rocket.chat/sdk";
-import fetch from "node-fetch";
+import { api, driver } from "@rocket.chat/sdk";
 import { getModerators } from "../helpers/getModerators";
 import { isModerator } from "../helpers/isModerator";
 import { sendToLog } from "../helpers/sendToLog";
@@ -37,24 +36,12 @@ export const priv: CommandInt = {
 
     const moderatorTeam = await getModerators(BOT);
 
-    const privateChannelRequest = await fetch(
-      `http://${BOT.hostPath}/api/v1/groups.create`,
-      {
-        method: "POST",
-        headers: {
-          "X-Auth-Token": BOT.botToken,
-          "X-User-ID": BOT.botId,
-          "Content-Type": "application/json",
-        },
-        body: `{ "name": "private-${target}", "members": ${JSON.stringify(
-          moderatorTeam.concat(target)
-        )} }`,
-      }
+    const privateChannel: PrivateChannelCreateInt = await api.post(
+      "groups.create",
+      { name: `private-${target}`, members: moderatorTeam.concat(target) }
     );
 
-    const privateChannelResponse: PrivateChannelCreateInt = await privateChannelRequest.json();
-
-    if (!privateChannelResponse.success) {
+    if (!privateChannel.success) {
       await driver.sendToRoom("Sorry, but I could not do that.", room);
       return;
     }
