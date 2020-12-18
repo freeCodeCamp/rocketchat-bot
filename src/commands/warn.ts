@@ -21,6 +21,7 @@ export const warn: CommandInt = {
       return;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const [target, ...reason] = message.msg!.split(" ").slice(2);
 
     const warning = `${message.u.username} has warned you for ${reason.join(

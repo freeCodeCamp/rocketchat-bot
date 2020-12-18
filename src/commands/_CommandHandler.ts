@@ -29,9 +29,6 @@ export const CommandHandler = async (
   const roomname = await driver.getRoomName(message.rid);
   const [prefix, commandName] = message.msg.split(" ");
   if (prefix.toLowerCase() === BOT.prefix) {
-    const response = "Command received!";
-    await driver.sendToRoom(response, roomname);
-
     for (const Command of CommandList) {
       if (commandName === Command.name) {
         await Command.command(message, roomname, BOT);

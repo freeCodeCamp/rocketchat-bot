@@ -1,9 +1,7 @@
 import dotenv from "dotenv";
-import { driver } from "@rocket.chat/sdk";
+import { api, driver } from "@rocket.chat/sdk";
 import { CommandHandler } from "./commands/_CommandHandler";
 import { BotInt } from "./interfaces/BotInt";
-import fetch from "node-fetch";
-import { LoginResponseInt } from "./interfaces/apiInt";
 
 dotenv.config();
 
@@ -18,7 +16,6 @@ if (!HOST || !USER || !PASS || !BOTNAME) {
 export const BOT: BotInt = {
   botId: "",
   botName: BOTNAME,
-  botToken: "",
   hostPath: HOST,
   logChannel: LOG_CHANNEL || "",
   prefix: process.env.PREFIX || "!bot",
@@ -30,14 +27,7 @@ const runbot = async () => {
   BOT.botId = await driver.login({ username: USER, password: PASS });
 
   // Auth to REST API
-  const apiAuthRequest = await fetch(`http://${BOT.hostPath}/api/v1/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: `{ "user": "${USER}", "password": "${PASS}" }`,
-  });
-  const apiAuthResponse: LoginResponseInt = await apiAuthRequest.json();
-  console.log(apiAuthResponse);
-  BOT.botToken = apiAuthResponse.data.authToken;
+  const apiAuthRequest = await api.login({ username: USER, password: PASS });
 
   // Join configured rooms.
   await driver.joinRooms(ROOMS);

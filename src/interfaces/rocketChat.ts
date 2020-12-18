@@ -7,6 +7,7 @@ export interface IMessage {
   emoji?: string; // emoji to use as avatar
   avatar?: string; // url
   groupable?: boolean; // ?
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   bot?: any; // integration details
   urls?: string[]; // ?
   mentions?: string[]; // ?
