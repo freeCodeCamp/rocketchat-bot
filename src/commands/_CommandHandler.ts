@@ -25,12 +25,12 @@ export const CommandHandler = async (
     console.error("No room id?");
     return;
   }
-  console.log(message);
+
   const roomname = await driver.getRoomName(message.rid);
   const [prefix, commandName] = message.msg.split(" ");
-  if (prefix.toLowerCase() === "!fcc") {
+  if (prefix.toLowerCase() === BOT.prefix) {
     const response = "Command received!";
-    const sentmsg = await driver.sendToRoom(response, roomname);
+    await driver.sendToRoom(response, roomname);
 
     for (const Command of CommandList) {
       if (commandName === Command.name) {
