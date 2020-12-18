@@ -10,6 +10,10 @@ This is a test instance for developing a chat bot with the Rocket.Chat SDK.
 This page is not yet deployed.
 <!--This page is currently deployed. [View the live website.]()-->
 
+## Available Commands
+
+Please review the [Commands](./docs/commands.md) file for the list of currently available commands.
+
 ## Feedback and Bugs
 
 If you have feedback or a bug report, please feel free to open a GitHub issue!
