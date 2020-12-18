@@ -1,5 +1,7 @@
-import { driver } from "@rocket.chat/sdk";
+import { api, driver } from "@rocket.chat/sdk";
 import { isModerator } from "../helpers/isModerator";
+import { sendToLog } from "../helpers/sendToLog";
+import { PrivateChannelDeleteInt } from "../interfaces/apiInt";
 import { CommandInt } from "../interfaces/CommandInt";
 
 export const close: CommandInt = {
@@ -27,5 +29,21 @@ export const close: CommandInt = {
       );
       return;
     }
+
+    const deleteChannel: PrivateChannelDeleteInt = await api.post(
+      "groups.delete",
+      { roomName: room }
+    );
+
+    if (!deleteChannel.success) {
+      await driver.sendToRoom("Sorry, but I cannot do that right now.", room);
+      return;
+    }
+
+    await sendToLog(
+      `${message.u.username} closed and deleted the ${room} channel.`,
+      BOT
+    );
+    return;
   },
 };

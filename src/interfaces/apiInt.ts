@@ -48,3 +48,7 @@ export interface PrivateChannelCreateInt {
   };
   success: boolean;
 }
+
+export interface PrivateChannelDeleteInt {
+  success: boolean;
+}
