@@ -8,7 +8,7 @@ import { LoginResponseInt } from "./interfaces/apiInt";
 dotenv.config();
 
 const { HOST, USER, PASS, BOTNAME, LOG_CHANNEL } = process.env;
-const ROOMS = ["general", "test"];
+const ROOMS = (process.env.ROOMS_TO_JOIN || "general").split(",");
 
 if (!HOST || !USER || !PASS || !BOTNAME) {
   console.error("Missing required environment variables.");
