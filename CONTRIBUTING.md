@@ -6,6 +6,26 @@ Please ensure all pull requests and contributions comply with the [Developer Cer
 
 First, fork this repository to your own account. Then use `git clone <url>` to bring your forked repository down to your local machine (remember to get the URL for *your* repository, not the original). Optionally, use `git remote add upstream <url>` to add the original repository as the upstream (this is helpful for keeping your fork up-to-date).
 
+## Running a Local Rocket.Chat Setup
+
+You will need to have Docker installed to run our Rocket.Chat configuration locally. Once you have done so, you can use a docker image to load a local instance of Rocket.Chat.
+
+After you have that set up, you'll want to [create a user](https://docs.rocket.chat/guides/bots/create-and-run-a-bot#1-create-a-bot-user) and assign it the `bot` role. This will be the user that your bot logs in as.
+
+## Preparing the Bot
+
+You'll need to set up a few environment variables. Copy the `sample.env` file to `.env` and assign the appropriate values:
+- `HOST`: The URL to your chat instance. This should be *without* the protocol (https://).
+- `USER`: The username for the bot user you created above.
+- `PASS`: The password for the bot user you created above.
+- `BOTNAME`: The bot's name, used in the online notification message.
+- `ROLE_LIST`: This is a comma separated list of moderator roles (used to confirm a user has the correct access to use moderation commands). Example: `"admin,leader,moderator"`.
+- `LOG_CHANNEL`: The name of the channel where the bot should log moderation activity.
+
+## Running the Bot
+
+You will need to install the dependency files with `npm i`, then build the TypeScript files into JavaScript files with `npm run build`. After building the files, you can launch the bot with `npm run start` - if you have set everything up correctly, the bot should send an online message to your `general` room.
+
 ## Claiming an Issue
 
 All of our issues are open to contributors! If you see an open issue you would like to work on, please comment on the issue so we may assign it to you. 
