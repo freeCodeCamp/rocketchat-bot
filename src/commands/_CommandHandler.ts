@@ -14,8 +14,7 @@ import { CommandList } from "./_CommandList";
  */
 export const CommandHandler = async (
   err: unknown,
-  messages: IMessage[],
-  _messageOptions: unknown
+  messages: IMessage[]
 ): Promise<void> => {
   if (err) {
     console.error(err);

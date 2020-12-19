@@ -4,7 +4,7 @@ import { CommandInt } from "../interfaces/CommandInt";
 export const coc: CommandInt = {
   name: "coc",
   description: "Returns information on the Code of Conduct.",
-  command: async (_message, room, _BOT) => {
+  command: async (_message, room) => {
     const codeOfConduct = `*freeCodeCamp Code of Conduct*
 These are the basic rules for interacting with the FreeCodeCamp community on any platform, including this chat server. You can read the full document on the [FreeCodeCamp article](https://freecodecamp.org/news/code-of-conduct).
 *No Harassment*: Harassment includes sexual language and imagery, deliberate intimidation, stalking, name-calling, unwelcome attention, libel, and any malicious hacking or social engineering. freeCodeCamp should be a harassment-free experience for everyone, regardless of gender, gender identity and expression, age, sexual orientation, disability, physical appearance, body size, race, national origin, or religion (or lack thereof).
