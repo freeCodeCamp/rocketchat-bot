@@ -1,4 +1,5 @@
 import { CommandInt } from "../interfaces/CommandInt";
+import { algo } from "./algo";
 import { close } from "./close";
 import { coc } from "./coc";
 import { eightball } from "./eightball";
@@ -21,4 +22,5 @@ export const CommandList: CommandInt[] = [
   close,
   quote,
   eightball,
+  algo,
 ];
