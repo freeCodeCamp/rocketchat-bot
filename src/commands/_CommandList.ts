@@ -1,6 +1,7 @@
 import { CommandInt } from "../interfaces/CommandInt";
 import { close } from "./close";
 import { coc } from "./coc";
+import { eightball } from "./eightball";
 import { help } from "./help";
 import { priv } from "./private";
 import { quote } from "./quote";
@@ -19,4 +20,5 @@ export const CommandList: CommandInt[] = [
   priv,
   close,
   quote,
+  eightball,
 ];
