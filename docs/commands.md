@@ -6,6 +6,7 @@ The bot currently has the following commands. Commands must be prefixed with...
 
 These commands are available to all users.
 
+- `algo`: Returns a random freeCodeCamp algorithm challenge.
 - `coc`: Returns a brief version of the freeCodeCamp Code of Conduct, with a link to the full article.
 - `eightball`: Returns a response from a Magic 8-Ball toy.
 - `help`: Returns a list of the bot's available commands.
