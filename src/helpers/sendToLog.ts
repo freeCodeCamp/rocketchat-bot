@@ -1,11 +1,18 @@
 import { driver } from "@rocket.chat/sdk";
 import { BotInt } from "../interfaces/BotInt";
 
+/**
+ * Sends the given message to the logChannel set
+ * in the .env
+ * @param {string} message Text to send
+ * @param {BotInt} BOT Bot configuration object
+ * @returns {Promise<void>} nothing
+ */
 export const sendToLog = async (
   message: string,
-  bot: BotInt
+  BOT: BotInt
 ): Promise<void> => {
-  const logChannel = bot.logChannel;
+  const logChannel = BOT.logChannel;
 
   if (!logChannel) {
     return;

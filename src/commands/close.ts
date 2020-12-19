@@ -8,6 +8,11 @@ export const close: CommandInt = {
   name: "close",
   description: "Closes a channel created with the private command.",
   command: async (message, room, BOT): Promise<void> => {
+    /**
+     * While this should not be possible (it is confirmed
+     * in the command handler), return early if the message does
+     * not have a user author to make TypeScript happy.
+     */
     if (!message.u) {
       await driver.sendToRoom("Oops I broke it.", room);
       return;

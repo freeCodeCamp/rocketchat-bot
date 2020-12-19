@@ -6,6 +6,10 @@ import { priv } from "./private";
 import { resources } from "./resources";
 import { warn } from "./warn";
 
+/**
+ * Construct an array of the commands for the handler
+ * to iterate through
+ */
 export const CommandList: CommandInt[] = [
   coc,
   help,
