@@ -20,7 +20,7 @@ export const modHelp: CommandInt = {
       return;
     }
     const commands = CommandList.filter((command) => command.modCommand).map(
-      (command) => `\`${command.name}\`: ${command.description}`
+      (command) => `\`${BOT.prefix} ${command.name}\`: ${command.description}`
     );
     const response = `Here are my available moderation commands:\n${commands
       .sort()
