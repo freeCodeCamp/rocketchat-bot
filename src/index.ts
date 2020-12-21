@@ -26,9 +26,13 @@ export const BOT: BotInt = {
  * The primary driver to run the bot.
  */
 const runBot = async () => {
+  const ssl = process.env.SSL ? true : false;
   // Connect to server, log in.
-  await driver.connect({ host: HOST, useSsl: false });
-  BOT.botId = await driver.login({ username: USER, password: PASS });
+  await driver.connect({ host: HOST, useSsl: ssl });
+  BOT.botId = await driver.login({
+    username: USER,
+    password: PASS,
+  });
 
   // Auth to REST API
   await api.login({ username: USER, password: PASS });
