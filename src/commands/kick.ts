@@ -55,7 +55,9 @@ export const kick: CommandInt = {
     await driver.sendDirectToUser(notice, target);
 
     await sendToLog(
-      `${message.u.username} has kicked ${target} from #${room}`,
+      `${
+        message.u.username
+      } has kicked ${target} from #${room} for: ${reason.join(" ")}`,
       BOT
     );
   },
