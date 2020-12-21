@@ -19,7 +19,7 @@ You'll need to set up a few environment variables. Copy the `sample.env` file to
 - `ROCKETCHAT_URL`: The URL to your chat instance. This should be _with_ the protocol (https://).
 - `ROCKETCHAT_USER`: The username for the bot user you created above.
 - `ROCKETCHAT_PASSWORD`: The password for the bot user you created above.
-- `SSL`: Set this to `true` if your URL uses HTTPS.
+- `ROCKETCHAT_USE_SSL`: Set this to `true` if your URL uses HTTPS.
 - `BOTNAME`: The bot's name, used in the online notification message.
 - `ROLE_LIST`: This is a comma separated list of moderator roles (used to confirm a user has the correct access to use moderation commands). Example: `"admin,leader,moderator"`.
 - `LOG_CHANNEL`: The name of the channel where the bot should log moderation activity.
