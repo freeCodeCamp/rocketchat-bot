@@ -39,6 +39,16 @@ export const kick: CommandInt = {
       return;
     }
 
+    const isTargetMod = await isModerator(target, BOT);
+
+    if (isTargetMod) {
+      await driver.sendToRoom(
+        "Sorry, but you cannot use this command on a fellow moderator.",
+        room
+      );
+      return;
+    }
+
     const userInfoRequest: UserInfoInt = await api.get("users.info", {
       username: target,
     });

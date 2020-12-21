@@ -31,6 +31,16 @@ export const warn: CommandInt = {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const [target, ...reasonArgs] = message.msg!.split(" ").slice(2);
 
+    const isTargetMod = await isModerator(target, BOT);
+
+    if (isTargetMod) {
+      await driver.sendToRoom(
+        "Sorry, but you cannot use this command on a fellow moderator.",
+        room
+      );
+      return;
+    }
+
     const reason = reasonArgs.join(" ");
 
     if (!reason) {
