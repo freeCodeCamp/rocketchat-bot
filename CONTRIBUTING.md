@@ -16,14 +16,15 @@ After you have that set up, you'll want to [create a user](https://docs.rocket.c
 
 You'll need to set up a few environment variables. Copy the `sample.env` file to `.env` and assign the appropriate values:
 
-- `HOST`: The URL to your chat instance. This should be _without_ the protocol (https://).
-- `USER`: The username for the bot user you created above.
-- `PASS`: The password for the bot user you created above.
+- `ROCKETCHAT_URL`: The URL to your chat instance. This should be _with_ the protocol (https://).
+- `ROCKETCHAT_USER`: The username for the bot user you created above.
+- `ROCKETCHAT_PASSWORD`: The password for the bot user you created above.
+- `SSL`: Set this to `true` if your URL uses HTTPS.
 - `BOTNAME`: The bot's name, used in the online notification message.
 - `ROLE_LIST`: This is a comma separated list of moderator roles (used to confirm a user has the correct access to use moderation commands). Example: `"admin,leader,moderator"`.
 - `LOG_CHANNEL`: The name of the channel where the bot should log moderation activity.
 - `PREFIX`: The string to call bot commands with. Messages that do not start with this string will be ignored.
-- `ROOMS_TO_JOIN`: A comma separated list of the rooms the bot should join on login.
+- `ROCKETCHAT_ROOM`: A comma separated list of the rooms the bot should join on login.
 
 ## Running the Bot
 
