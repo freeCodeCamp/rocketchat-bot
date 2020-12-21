@@ -4,6 +4,7 @@ import { CommandInt } from "../interfaces/CommandInt";
 export const coc: CommandInt = {
   name: "coc",
   description: "Returns information on the Code of Conduct.",
+  modCommand: false,
   command: async (_message, room) => {
     const codeOfConduct = `*freeCodeCamp Code of Conduct*
 These are the basic rules for interacting with the FreeCodeCamp community on any platform, including this chat server. You can read the full document on the [FreeCodeCamp article](https://freecodecamp.org/news/code-of-conduct).

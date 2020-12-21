@@ -7,6 +7,7 @@ import { CommandInt } from "../interfaces/CommandInt";
 export const close: CommandInt = {
   name: "close",
   description: "Closes a channel created with the private command.",
+  modCommand: true,
   command: async (message, room, BOT): Promise<void> => {
     /**
      * While this should not be possible (it is confirmed

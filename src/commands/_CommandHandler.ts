@@ -43,5 +43,9 @@ export const CommandHandler = async (
         return;
       }
     }
+    await driver.sendToRoom(
+      `I am sorry, but \`${commandName}\` is not a valid command.`,
+      roomName
+    );
   }
 };

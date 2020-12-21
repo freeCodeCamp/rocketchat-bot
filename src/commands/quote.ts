@@ -5,6 +5,7 @@ import { CommandInt } from "../interfaces/CommandInt";
 export const quote: CommandInt = {
   name: "quote",
   description: "Returns a quote from the freeCodeCamp repository.",
+  modCommand: false,
   command: async (_message, room) => {
     const randomIndex = Math.floor(
       Math.random() * quotes.motivationalQuotes.length
