@@ -46,7 +46,10 @@ const runBot = async () => {
   console.log("connected and waiting for messages");
 
   //greet
-  await driver.sendToRoom(`${BOTNAME} is listening...`, ROOMS[0]);
+  await driver.sendToRoom(
+    `\`${BOTNAME}\` is online!`,
+    BOT.logChannel || ROOMS[0]
+  );
   console.log("Greeting message sent.");
 };
 

@@ -36,6 +36,9 @@ export const warn: CommandInt = {
 
     await driver.sendDirectToUser(warning, target);
 
-    await sendToLog(`${message.u.username} warned ${target}.`, BOT);
+    await sendToLog(
+      `${message.u.username} warned ${target} for: ${reason.join(" ")}.`,
+      BOT
+    );
   },
 };
