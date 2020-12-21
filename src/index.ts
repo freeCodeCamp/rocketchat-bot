@@ -36,7 +36,7 @@ export const BOT: BotInt = {
  * The primary driver to run the bot.
  */
 const runBot = async () => {
-  const ssl = process.env.SSL ? true : false;
+  const ssl = process.env.ROCKETCHAT_USE_SSL ? true : false;
   // Connect to server, log in.
   await driver.connect({ host: ROCKETCHAT_URL, useSsl: ssl });
   BOT.botId = await driver.login({
