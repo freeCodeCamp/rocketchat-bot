@@ -4,6 +4,7 @@ import { BotInt } from "./BotInt";
 export interface CommandInt {
   name: string;
   description: string;
+  modCommand: boolean;
   /**
    * The function that executes when the command `name` is passed in the message.
    * @param {IMessage} message The message object to run the command against.

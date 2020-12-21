@@ -5,6 +5,7 @@ import { CommandInt } from "../interfaces/CommandInt";
 export const algo: CommandInt = {
   name: "algo",
   description: "Returns a random freeCodeCamp algorithm challenge.",
+  modCommand: false,
   command: async (_, room) => {
     const randomSuper = Math.floor(Math.random() * algorithmSlugs.length);
     const selectedSuper = algorithmSlugs[randomSuper];

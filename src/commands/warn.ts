@@ -6,6 +6,7 @@ import { CommandInt } from "../interfaces/CommandInt";
 export const warn: CommandInt = {
   name: "warn",
   description: "Issues a warning to a user. Restricted to moderators.",
+  modCommand: true,
   command: async (message, room, BOT) => {
     /**
      * While this should not be possible (it is confirmed

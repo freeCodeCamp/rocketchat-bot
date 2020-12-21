@@ -8,6 +8,7 @@ import { CommandInt } from "../interfaces/CommandInt";
 export const priv: CommandInt = {
   name: "private",
   description: "Creates a private room with a user and the moderator team",
+  modCommand: true,
   command: async (message, room, BOT) => {
     /**
      * While this should not be possible (it is confirmed

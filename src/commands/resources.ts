@@ -4,6 +4,7 @@ import { CommandInt } from "../interfaces/CommandInt";
 export const resources: CommandInt = {
   name: "resources",
   description: "Returns a list of helpful links",
+  modCommand: false,
   command: async (_message, room) => {
     const coc =
       "[freeCodeCamp Code of Conduct](https://freecodecamp.org/news/code-of-conduct) - The set of rules we apply to all of our community platforms.";
