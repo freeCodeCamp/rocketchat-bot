@@ -17,7 +17,17 @@ export const kick: CommandInt = {
       return;
     }
 
-    const [target, ...reason] = message.msg.split(" ").slice(2);
+    const [target, ...reasonArgs] = message.msg.split(" ").slice(2);
+
+    const reason = reasonArgs.join(" ");
+
+    if (!reason) {
+      await driver.sendToRoom(
+        "Sorry, but would you please provide the reason for taking this action?",
+        room
+      );
+      return;
+    }
 
     const isMod = await isModerator(message.u.username, BOT);
 
@@ -42,23 +52,17 @@ export const kick: CommandInt = {
       roomId: roomInfoRequest.room._id,
     });
 
-    if (!didKick.success) {
+    if (!didKick || !didKick.success) {
       await driver.sendToRoom("Sorry, but I cannot do that right now.", room);
       return;
     }
 
-    const notice = `${
-      message.u.username
-    } has kicked you from the #${room} for:\n${reason.join(
-      " "
-    )}\nPlease remember to follow our [code of conduct](https://freecodecamp.org/news/code-of-conduct).`;
+    const notice = `${message.u.username} has kicked you from #${room} for:\n${reason}\nPlease remember to follow our [code of conduct](https://freecodecamp.org/news/code-of-conduct).`;
 
     await driver.sendDirectToUser(notice, target);
 
     await sendToLog(
-      `${
-        message.u.username
-      } has kicked ${target} from #${room} for: ${reason.join(" ")}`,
+      `${message.u.username} has kicked ${target} from #${room} for: ${reason}`,
       BOT
     );
   },

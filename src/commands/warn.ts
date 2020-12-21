@@ -29,16 +29,24 @@ export const warn: CommandInt = {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const [target, ...reason] = message.msg!.split(" ").slice(2);
+    const [target, ...reasonArgs] = message.msg!.split(" ").slice(2);
 
-    const warning = `${message.u.username} has warned you for:\n${reason.join(
-      " "
-    )}.\nPlease remember to follow our Code of Conduct.`;
+    const reason = reasonArgs.join(" ");
+
+    if (!reason) {
+      await driver.sendToRoom(
+        "Sorry, but would you please provide the reason for this action?",
+        room
+      );
+      return;
+    }
+
+    const warning = `${message.u.username} has warned you for:\n${reason}.\nPlease remember to follow our [Code of Conduct](https://freecodecamp.org/news/code-of-conduct).`;
 
     await driver.sendDirectToUser(warning, target);
 
     await sendToLog(
-      `${message.u.username} warned ${target} for: ${reason.join(" ")}.`,
+      `${message.u.username} warned ${target} for: ${reason}.`,
       BOT
     );
   },
