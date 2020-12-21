@@ -4,6 +4,7 @@ import { close } from "./close";
 import { coc } from "./coc";
 import { eightball } from "./eightball";
 import { help } from "./help";
+import { kick } from "./kick";
 import { priv } from "./private";
 import { quote } from "./quote";
 import { resources } from "./resources";
@@ -23,4 +24,5 @@ export const CommandList: CommandInt[] = [
   quote,
   eightball,
   algo,
+  kick,
 ];

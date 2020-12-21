@@ -44,3 +44,46 @@ export interface PrivateChannelCreateInt {
 export interface PrivateChannelDeleteInt {
   success: boolean;
 }
+
+export interface RoomInfoInt {
+  room: {
+    _id: string;
+    name: string;
+    fname: string;
+    t: string;
+    msgs: number;
+    usersCount: number;
+    u: {
+      _id: string;
+      username: string;
+    };
+    customFields: { [key: string]: unknown };
+    broadcast: boolean;
+    encrypted: boolean;
+    ts: string;
+    ro: boolean;
+    default: boolean;
+    sysMes: boolean;
+    _updatedAt: string;
+  };
+  success: boolean;
+}
+
+export interface ChannelKickInt {
+  group: {
+    _id: string;
+    name: string;
+    t: string;
+    usernames: [string];
+    msgs: number;
+    u: {
+      _id: string;
+      username: string;
+    };
+    ts: string;
+    ro: boolean;
+    sysMes: boolean;
+    _updatedAt: string;
+  };
+  success: boolean;
+}

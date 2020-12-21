@@ -5,7 +5,7 @@ import { CommandList } from "./_CommandList";
 export const help: CommandInt = {
   name: "help",
   description: "Returns information on the bot's list of commands.",
-  command: async (_, room) => {
+  command: async (_message, room) => {
     const commands = CommandList.map(
       (command) => `\`${command.name}\`: ${command.description}`
     );
