@@ -46,6 +46,14 @@ export const kick: CommandInt = {
       return;
     }
 
+    const notice = `${
+      message.u.username
+    } has kicked you from the #${room} for:\n${reason.join(
+      " "
+    )}\nPlease remember to follow our [code of conduct](https://freecodecamp.org/news/code-of-conduct).`;
+
+    await driver.sendDirectToUser(notice, target);
+
     await sendToLog(
       `${message.u.username} has kicked ${target} from #${room}`,
       BOT
