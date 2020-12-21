@@ -5,10 +5,18 @@ import { BotInt } from "./interfaces/BotInt";
 
 dotenv.config();
 
-const { HOST, USER, PASS, BOTNAME, LOG_CHANNEL } = process.env;
-const ROOMS = (process.env.ROOMS_TO_JOIN || "general").split(",");
+const {
+  ROCKETCHAT_URL,
+  ROCKETCHAT_USER,
+  ROCKETCHAT_PASSWORD,
+  BOTNAME,
+  LOG_CHANNEL,
+} = process.env;
+const ROOMS = (process.env.ROCKETCHAT_ROOM || "general")
+  .split(",")
+  .map((el) => el.trim());
 
-if (!HOST || !USER || !PASS || !BOTNAME) {
+if (!ROCKETCHAT_URL || !ROCKETCHAT_USER || !ROCKETCHAT_PASSWORD || !BOTNAME) {
   console.error("Missing required environment variables.");
   process.exit(1);
 }
@@ -16,10 +24,12 @@ if (!HOST || !USER || !PASS || !BOTNAME) {
 export const BOT: BotInt = {
   botId: "",
   botName: BOTNAME,
-  hostPath: HOST,
+  hostPath: ROCKETCHAT_URL,
   logChannel: LOG_CHANNEL || "",
   prefix: process.env.PREFIX || "!bot",
-  modRoles: process.env.ROLE_LIST?.split(",") || ["none"],
+  modRoles: process.env.ROLE_LIST?.split(",").map((el) => el.trim()) || [
+    "none",
+  ],
 };
 
 /**
@@ -28,14 +38,14 @@ export const BOT: BotInt = {
 const runBot = async () => {
   const ssl = process.env.SSL ? true : false;
   // Connect to server, log in.
-  await driver.connect({ host: HOST, useSsl: ssl });
+  await driver.connect({ host: ROCKETCHAT_URL, useSsl: ssl });
   BOT.botId = await driver.login({
-    username: USER,
-    password: PASS,
+    username: ROCKETCHAT_USER,
+    password: ROCKETCHAT_PASSWORD,
   });
 
   // Auth to REST API
-  await api.login({ username: USER, password: PASS });
+  await api.login({ username: ROCKETCHAT_USER, password: ROCKETCHAT_PASSWORD });
 
   // Join configured rooms.
   await driver.joinRooms(ROOMS);
