@@ -10,6 +10,7 @@ These commands are available to all users.
 - `coc`: Returns a brief version of the freeCodeCamp Code of Conduct, with a link to the full article.
 - `eightball`: Returns a response from a Magic 8-Ball toy.
 - `help`: Returns a list of the bot's available commands.
+- `ping`: Returns a message with the bot's response time in milliseconds.
 - `quote`: Returns a random motivational quote from freeCodeCamp's curated list.
 - `resources`: Returns a list of helpful freeCodeCamp resources.
 

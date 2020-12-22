@@ -6,6 +6,7 @@ import { eightball } from "./eightball";
 import { help } from "./help";
 import { kick } from "./kick";
 import { modHelp } from "./modHelp";
+import { ping } from "./ping";
 import { priv } from "./private";
 import { quote } from "./quote";
 import { resources } from "./resources";
@@ -27,4 +28,5 @@ export const CommandList: CommandInt[] = [
   algo,
   kick,
   modHelp,
+  ping,
 ];
