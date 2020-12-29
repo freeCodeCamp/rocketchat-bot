@@ -1,4 +1,5 @@
 import { driver } from "@rocket.chat/sdk";
+import { logBotMessage } from "../helpers/botLogging";
 import { CommandInt } from "../interfaces/CommandInt";
 import { CommandList } from "./_CommandList";
 
@@ -12,31 +13,32 @@ export const help: CommandInt = {
   ],
   modCommand: false,
   command: async (message, room, BOT) => {
-    const commands = CommandList.filter((command) => !command.modCommand);
+    try {
+      const commands = CommandList.filter((command) => !command.modCommand);
 
-    const commandList = commands.map(
-      (command) => `\`${BOT.prefix} ${command.name}\`: ${command.description}`
-    );
+      const commandList = commands.map(
+        (command) => `\`${BOT.prefix} ${command.name}\`: ${command.description}`
+      );
 
-    const [query] = message.msg!.split(" ").slice(2);
+      const [query] = message.msg!.split(" ").slice(2);
 
-    if (!query) {
-      const response = `Hello! I am a chat bot created specifically for this server! I have a few commands available - here is the information on those commands:\n${commandList
-        .sort()
-        .join("\n")}`;
-      await driver.sendToRoom(response, room);
-      return;
-    }
+      if (!query) {
+        const response = `Hello! I am a chat bot created specifically for this server! I have a few commands available - here is the information on those commands:\n${commandList
+          .sort()
+          .join("\n")}`;
+        await driver.sendToRoom(response, room);
+        return;
+      }
 
-    const targetCommand = commands.find((el) => el.name === query);
+      const targetCommand = commands.find((el) => el.name === query);
 
-    if (!targetCommand) {
-      const response = `I am so sorry, but I do not have a public ${query} command.`;
-      await driver.sendToRoom(response, room);
-      return;
-    }
+      if (!targetCommand) {
+        const response = `I am so sorry, but I do not have a public ${query} command.`;
+        await driver.sendToRoom(response, room);
+        return;
+      }
 
-    const response = `*Information on my \`${query}\` command:*
+      const response = `*Information on my \`${query}\` command:*
 _Description_
 ${targetCommand.description}
 
@@ -48,6 +50,13 @@ ${targetCommand.usage
   .map((use) => use.replace(/\{prefix\}/g, BOT.prefix))
   .join("\n")}`;
 
-    await driver.sendToRoom(response, room);
+      await driver.sendToRoom(response, room);
+    } catch (err) {
+      await logBotMessage(
+        `${room} had an error with the \`help\` command. Check the logs for more info.`,
+        BOT
+      );
+      console.error(err);
+    }
   },
 };

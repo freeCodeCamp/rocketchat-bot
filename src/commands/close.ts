@@ -1,4 +1,5 @@
 import { api, driver } from "@rocket.chat/sdk";
+import { logBotMessage } from "../helpers/botLogging";
 import { isModerator } from "../helpers/isModerator";
 import { sendToLog } from "../helpers/sendToLog";
 import { PrivateChannelDeleteInt } from "../interfaces/apiInt";
@@ -13,47 +14,55 @@ export const close: CommandInt = {
   ],
   modCommand: true,
   command: async (message, room, BOT): Promise<void> => {
-    /**
-     * While this should not be possible (it is confirmed
-     * in the command handler), return early if the message does
-     * not have a user author to make TypeScript happy.
-     */
-    if (!message.u) {
-      await driver.sendToRoom("Oops I broke it.", room);
-      return;
-    }
-    const modCheck = await isModerator(message.u.username, BOT);
+    try {
+      /**
+       * While this should not be possible (it is confirmed
+       * in the command handler), return early if the message does
+       * not have a user author to make TypeScript happy.
+       */
+      if (!message.u) {
+        await driver.sendToRoom("Oops I broke it.", room);
+        return;
+      }
+      const modCheck = await isModerator(message.u.username, BOT);
 
-    if (!modCheck) {
-      await driver.sendToRoom(
-        "Sorry, but this command is locked to moderators.",
-        room
+      if (!modCheck) {
+        await driver.sendToRoom(
+          "Sorry, but this command is locked to moderators.",
+          room
+        );
+        return;
+      }
+
+      if (!room.startsWith("private-")) {
+        await driver.sendToRoom(
+          "Sorry, but I can only close channels created with my `private` command.",
+          room
+        );
+        return;
+      }
+
+      const deleteChannel: PrivateChannelDeleteInt = await api.post(
+        "groups.delete",
+        { roomName: room }
+      );
+
+      if (!deleteChannel.success) {
+        await driver.sendToRoom("Sorry, but I cannot do that right now.", room);
+        return;
+      }
+
+      await sendToLog(
+        `${message.u.username} closed and deleted the ${room} channel.`,
+        BOT
       );
       return;
-    }
-
-    if (!room.startsWith("private-")) {
-      await driver.sendToRoom(
-        "Sorry, but I can only close channels created with my `private` command.",
-        room
+    } catch (err) {
+      await logBotMessage(
+        `${room} had an error with the \`close\` command. Check the logs for more info.`,
+        BOT
       );
-      return;
+      console.error(err);
     }
-
-    const deleteChannel: PrivateChannelDeleteInt = await api.post(
-      "groups.delete",
-      { roomName: room }
-    );
-
-    if (!deleteChannel.success) {
-      await driver.sendToRoom("Sorry, but I cannot do that right now.", room);
-      return;
-    }
-
-    await sendToLog(
-      `${message.u.username} closed and deleted the ${room} channel.`,
-      BOT
-    );
-    return;
   },
 };

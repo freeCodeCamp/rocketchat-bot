@@ -1,4 +1,5 @@
 import { api, driver } from "@rocket.chat/sdk";
+import { logBotMessage } from "../helpers/botLogging";
 import { getModerators } from "../helpers/getModerators";
 import { isModerator } from "../helpers/isModerator";
 import { sendToLog } from "../helpers/sendToLog";
@@ -14,52 +15,60 @@ export const priv: CommandInt = {
   ],
   modCommand: true,
   command: async (message, room, BOT) => {
-    /**
-     * While this should not be possible (it is confirmed
-     * in the command handler), return early if the message does
-     * not have a user author to make TypeScript happy.
-     */
-    if (!message.u) {
-      await driver.sendToRoom("Oops I broke it.", room);
-      return;
-    }
+    try {
+      /**
+       * While this should not be possible (it is confirmed
+       * in the command handler), return early if the message does
+       * not have a user author to make TypeScript happy.
+       */
+      if (!message.u) {
+        await driver.sendToRoom("Oops I broke it.", room);
+        return;
+      }
 
-    const modCheck = await isModerator(message.u.username, BOT);
+      const modCheck = await isModerator(message.u.username, BOT);
 
-    if (!modCheck) {
-      await driver.sendToRoom(
-        "Sorry, but this command is locked to moderators.",
-        room
+      if (!modCheck) {
+        await driver.sendToRoom(
+          "Sorry, but this command is locked to moderators.",
+          room
+        );
+        return;
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const target = message.msg!.split(" ").slice(2);
+
+      if (!target) {
+        await driver.sendToRoom(
+          "Sorry, but who did you want to create a private room for?",
+          room
+        );
+        return;
+      }
+
+      const moderatorTeam = await getModerators(BOT);
+
+      const privateChannel: PrivateChannelCreateInt = await api.post(
+        "groups.create",
+        { name: `private-${target}`, members: moderatorTeam.concat(target) }
       );
-      return;
-    }
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const target = message.msg!.split(" ").slice(2);
+      if (!privateChannel.success) {
+        await driver.sendToRoom("Sorry, but I could not do that.", room);
+        return;
+      }
 
-    if (!target) {
-      await driver.sendToRoom(
-        "Sorry, but who did you want to create a private room for?",
-        room
+      await sendToLog(
+        `${message.u.username} created a private discussion with ${target}.`,
+        BOT
       );
-      return;
+    } catch (err) {
+      await logBotMessage(
+        `${room} had an error with the \`private\` command. Check the logs for more info.`,
+        BOT
+      );
+      console.error(err);
     }
-
-    const moderatorTeam = await getModerators(BOT);
-
-    const privateChannel: PrivateChannelCreateInt = await api.post(
-      "groups.create",
-      { name: `private-${target}`, members: moderatorTeam.concat(target) }
-    );
-
-    if (!privateChannel.success) {
-      await driver.sendToRoom("Sorry, but I could not do that.", room);
-      return;
-    }
-
-    await sendToLog(
-      `${message.u.username} created a private discussion with ${target}.`,
-      BOT
-    );
   },
 };

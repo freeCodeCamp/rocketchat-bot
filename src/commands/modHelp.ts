@@ -1,4 +1,5 @@
 import { driver } from "@rocket.chat/sdk";
+import { logBotMessage } from "../helpers/botLogging";
 import { isModerator } from "../helpers/isModerator";
 import { CommandInt } from "../interfaces/CommandInt";
 import { CommandList } from "./_CommandList";
@@ -13,40 +14,41 @@ export const modHelp: CommandInt = {
   ],
   modCommand: true,
   command: async (message, room, BOT) => {
-    const commands = CommandList.filter((command) => command.modCommand);
+    try {
+      const commands = CommandList.filter((command) => command.modCommand);
 
-    const commandList = commands.map(
-      (command) => `\`${BOT.prefix} ${command.name}\`: ${command.description}`
-    );
-
-    const isMod = await isModerator(message.u!.username, BOT);
-    if (!isMod) {
-      await driver.sendToRoom(
-        "Sorry, but this command is restricted to moderators.",
-        room
+      const commandList = commands.map(
+        (command) => `\`${BOT.prefix} ${command.name}\`: ${command.description}`
       );
-      return;
-    }
 
-    const [query] = message.msg!.split(" ").slice(2);
+      const isMod = await isModerator(message.u!.username, BOT);
+      if (!isMod) {
+        await driver.sendToRoom(
+          "Sorry, but this command is restricted to moderators.",
+          room
+        );
+        return;
+      }
 
-    if (!query) {
-      const response = `Here are my available moderation commands:\n${commandList
-        .sort()
-        .join("\n")}`;
-      await driver.sendToRoom(response, room);
-      return;
-    }
+      const [query] = message.msg!.split(" ").slice(2);
 
-    const targetCommand = commands.find((el) => el.name === query);
+      if (!query) {
+        const response = `Here are my available moderation commands:\n${commandList
+          .sort()
+          .join("\n")}`;
+        await driver.sendToRoom(response, room);
+        return;
+      }
 
-    if (!targetCommand) {
-      const response = `I am so sorry, but I do not have a private ${query} command.`;
-      await driver.sendToRoom(response, room);
-      return;
-    }
+      const targetCommand = commands.find((el) => el.name === query);
 
-    const response = `*Information on my \`${query}\` command:*
+      if (!targetCommand) {
+        const response = `I am so sorry, but I do not have a private ${query} command.`;
+        await driver.sendToRoom(response, room);
+        return;
+      }
+
+      const response = `*Information on my \`${query}\` command:*
 _Description_
 ${targetCommand.description}
 
@@ -60,6 +62,13 @@ ${targetCommand.usage
   .map((use) => use.replace(/\{prefix\}/g, BOT.prefix))
   .join("\n")}`;
 
-    await driver.sendToRoom(response, room);
+      await driver.sendToRoom(response, room);
+    } catch (err) {
+      await logBotMessage(
+        `${room} had an error with the \`modHelp\` command. Check the logs for more info.`,
+        BOT
+      );
+      console.error(err);
+    }
   },
 };
