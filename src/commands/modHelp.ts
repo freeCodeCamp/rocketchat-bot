@@ -19,6 +19,15 @@ export const modHelp: CommandInt = {
       (command) => `\`${BOT.prefix} ${command.name}\`: ${command.description}`
     );
 
+    const isMod = await isModerator(message.u!.username, BOT);
+    if (!isMod) {
+      await driver.sendToRoom(
+        "Sorry, but this command is restricted to moderators.",
+        room
+      );
+      return;
+    }
+
     const [query] = message.msg!.split(" ").slice(2);
 
     if (!query) {
