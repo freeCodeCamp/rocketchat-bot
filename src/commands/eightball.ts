@@ -4,10 +4,12 @@ import { CommandInt } from "../interfaces/CommandInt";
 export const eightball: CommandInt = {
   name: "eightball",
   description: "Answers your question with a Magic Eightball phrase.",
-  parameters: [],
-  usage: ["`{prefix} eightball` - will return a magic eightball response."],
+  parameters: ["...question"],
+  usage: [
+    "`{prefix} eightball question` - will return a magic eightball response for the given `question`.",
+  ],
   modCommand: false,
-  command: async (_, room) => {
+  command: async (message, room) => {
     const options = [
       "As I see it, yes.",
       "Ask again later.",
@@ -31,6 +33,19 @@ export const eightball: CommandInt = {
       "You may rely on it.",
     ];
     const randomIndex = Math.floor(Math.random() * options.length);
-    await driver.sendToRoom(options[randomIndex], room);
+    const [...question] = message.msg!.split(" ").slice(2);
+
+    if (!question || !question.length) {
+      await driver.sendToRoom(
+        "Sorry, but what question did you want me to answer?",
+        room
+      );
+      return;
+    }
+
+    const response = `*Question:* ${question.join(" ")}\n*Response:*${
+      options[randomIndex]
+    }`;
+    await driver.sendToRoom(response, room);
   },
 };
