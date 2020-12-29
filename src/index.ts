@@ -59,7 +59,7 @@ const runBot = async () => {
   await api.login({ username: ROCKETCHAT_USER, password: ROCKETCHAT_PASSWORD });
 
   // Join configured rooms.
-  await driver.joinRooms(ROOMS);
+  await driver.joinRooms(ROOMS.concat([BOT.modLogChannel, BOT.botLogChannel]));
   console.log("joined rooms");
 
   // Listen for messages.
@@ -72,7 +72,7 @@ const runBot = async () => {
 
   //greet
   await driver.sendToRoom(
-    `\`${BOTNAME}\` is online and running ${BOT.version}!`,
+    `\`${BOTNAME}\` is online and running version: \`${BOT.version}\`!`,
     BOT.botLogChannel || ROOMS[0]
   );
   console.log("Greeting message sent.");
