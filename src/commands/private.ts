@@ -8,6 +8,10 @@ import { CommandInt } from "../interfaces/CommandInt";
 export const priv: CommandInt = {
   name: "private",
   description: "Creates a private room with a user and the moderator team",
+  parameters: ["user"],
+  usage: [
+    "`{prefix} private user` - will create a private channel, add the `user` to that channel, and add all moderators to the channel based on the configured moderator roles.",
+  ],
   modCommand: true,
   command: async (message, room, BOT) => {
     /**
