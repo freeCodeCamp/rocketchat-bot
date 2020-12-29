@@ -10,7 +10,8 @@ const {
   ROCKETCHAT_USER,
   ROCKETCHAT_PASSWORD,
   BOTNAME,
-  LOG_CHANNEL,
+  MOD_LOG_CHANNEL,
+  BOT_LOG_CHANNEL,
 } = process.env;
 const ROOMS = (process.env.ROCKETCHAT_ROOM || "general")
   .split(",")
@@ -21,11 +22,21 @@ if (!ROCKETCHAT_URL || !ROCKETCHAT_USER || !ROCKETCHAT_PASSWORD || !BOTNAME) {
   process.exit(1);
 }
 
+if (!MOD_LOG_CHANNEL || !BOT_LOG_CHANNEL) {
+  console.warn(
+    "Missing log channel settings. Logging will be disabled for this instance!"
+  );
+}
+
 export const BOT: BotInt = {
   botId: "",
   botName: BOTNAME,
   hostPath: ROCKETCHAT_URL,
-  logChannel: LOG_CHANNEL || "",
+  modLogChannel: MOD_LOG_CHANNEL || "",
+  botLogChannel: BOT_LOG_CHANNEL || "",
+  version:
+    process.env.HEROKU_RELEASE_VERSION ||
+    "Unknown Heroku release version. Is this a local instance?",
   prefix: process.env.PREFIX || "!bot",
   modRoles: process.env.ROLE_LIST?.split(",").map((el) => el.trim()) || [
     "none",
@@ -61,8 +72,8 @@ const runBot = async () => {
 
   //greet
   await driver.sendToRoom(
-    `\`${BOTNAME}\` is online!`,
-    BOT.logChannel || ROOMS[0]
+    `\`${BOTNAME}\` is online and running ${BOT.version}!`,
+    BOT.botLogChannel || ROOMS[0]
   );
   console.log("Greeting message sent.");
 };

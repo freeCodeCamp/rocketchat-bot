@@ -2,7 +2,9 @@ export interface BotInt {
   botId: string;
   botName: string;
   hostPath: string;
-  logChannel: string;
+  modLogChannel: string;
+  botLogChannel: string;
+  version: string;
   prefix: string;
   modRoles: string[];
 }

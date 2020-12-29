@@ -12,7 +12,7 @@ export const sendToLog = async (
   message: string,
   BOT: BotInt
 ): Promise<void> => {
-  const logChannel = BOT.logChannel;
+  const logChannel = BOT.modLogChannel;
 
   if (!logChannel) {
     return;
