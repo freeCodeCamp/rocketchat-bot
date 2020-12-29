@@ -10,6 +10,7 @@ import { modHelp } from "./modHelp";
 import { ping } from "./ping";
 import { priv } from "./private";
 import { quote } from "./quote";
+import { rescind } from "./rescind";
 import { resources } from "./resources";
 import { warn } from "./warn";
 
@@ -31,4 +32,5 @@ export const CommandList: CommandInt[] = [
   modHelp,
   ping,
   add,
+  rescind,
 ];

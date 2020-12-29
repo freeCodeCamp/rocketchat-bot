@@ -23,4 +23,5 @@ These commands are locked to moderators.
 - `kick <username> <...reason>`: This command kicks the `username` from the room it was called in. The command will log the action to the log channel, and send a DM to the user informing them of the `reason` for the kick.
 - `modHelp <?command>`: This command returns a list of the bot's available moderation commands, or a detailed description of the specific `command`.
 - `private <username>`: This command will create a new private room with the `username` user and all members of the moderator team.
+- `rescind <username>`: This command sends a notice rescinding (undoing) the warning previously sent to `username` and logs the action in the log channel.
 - `warn <username> <...reason>`: This command sends a DM warning the `username` user for the given `reason`. The bot will send a log to the provided log channel.
