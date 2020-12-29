@@ -4,6 +4,8 @@ import { CommandInt } from "../interfaces/CommandInt";
 export const eightball: CommandInt = {
   name: "eightball",
   description: "Answers your question with a Magic Eightball phrase.",
+  parameters: [],
+  usage: ["`{prefix} eightball` - will return a magic eightball response."],
   modCommand: false,
   command: async (_, room) => {
     const options = [

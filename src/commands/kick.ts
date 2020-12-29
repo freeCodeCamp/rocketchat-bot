@@ -7,6 +7,10 @@ import { CommandInt } from "../interfaces/CommandInt";
 export const kick: CommandInt = {
   name: "kick",
   description: "Kicks a user from the room.",
+  parameters: ["user", "reason"],
+  usage: [
+    "`{prefix} kick user reason` - will kick the `user` from the room the command is called in, DM that `user` with the `reason` for the action, and log the action in the log channel.",
+  ],
   modCommand: true,
   command: async (message, room, BOT) => {
     if (!message.u) {

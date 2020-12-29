@@ -7,6 +7,10 @@ import { CommandInt } from "../interfaces/CommandInt";
 export const close: CommandInt = {
   name: "close",
   description: "Closes a channel created with the private command.",
+  parameters: [],
+  usage: [
+    "`{prefix} close` - will close the channel this command is called in, as long as the channel name starts with `private-`.",
+  ],
   modCommand: true,
   command: async (message, room, BOT): Promise<void> => {
     /**

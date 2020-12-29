@@ -4,6 +4,10 @@ import { CommandInt } from "../interfaces/CommandInt";
 export const coc: CommandInt = {
   name: "coc",
   description: "Returns information on the Code of Conduct.",
+  parameters: [],
+  usage: [
+    "`{prefix} coc` - will return a summarised version of the freeCodeCamp Code of Conduct.",
+  ],
   modCommand: false,
   command: async (_message, room) => {
     const codeOfConduct = `*freeCodeCamp Code of Conduct*

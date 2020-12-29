@@ -6,6 +6,10 @@ import { CommandInt } from "../interfaces/CommandInt";
 export const warn: CommandInt = {
   name: "warn",
   description: "Issues a warning to a user. Restricted to moderators.",
+  parameters: ["user", "reason"],
+  usage: [
+    "`{prefix} warn user reason` - will issue a DM warning to the `user` for the given `reason` and log the action in the log channel.",
+  ],
   modCommand: true,
   command: async (message, room, BOT) => {
     /**
