@@ -18,6 +18,7 @@ These commands are available to all users.
 
 These commands are locked to moderators.
 
+- `add <username>`: This command will add the `username` to the room it was called in. The command will log the action to the log channel and send a DM to the user to let them know they are in a new room.
 - `close`: This command will close (delete) the channel it is used in, as long as that channel was created with the `private` command (channel name starts with "private-").
 - `kick <username> <...reason>`: This command kicks the `username` from the room it was called in. The command will log the action to the log channel, and send a DM to the user informing them of the `reason` for the kick.
 - `modHelp <?command>`: This command returns a list of the bot's available moderation commands, or a detailed description of the specific `command`.

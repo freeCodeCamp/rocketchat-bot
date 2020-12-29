@@ -87,3 +87,17 @@ export interface ChannelKickInt {
   };
   success: boolean;
 }
+
+export interface ChannelInviteInt {
+  channel: {
+    _id: string;
+    ts: string;
+    t: string;
+    name: string;
+    usernames: string[];
+    msgs: number;
+    _updatedAt: string;
+    lm: string;
+  };
+  success: boolean;
+}
