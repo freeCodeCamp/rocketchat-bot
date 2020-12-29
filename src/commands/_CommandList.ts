@@ -1,4 +1,5 @@
 import { CommandInt } from "../interfaces/CommandInt";
+import { add } from "./add";
 import { algo } from "./algo";
 import { close } from "./close";
 import { coc } from "./coc";
@@ -29,4 +30,5 @@ export const CommandList: CommandInt[] = [
   kick,
   modHelp,
   ping,
+  add,
 ];
