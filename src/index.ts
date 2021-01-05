@@ -12,6 +12,7 @@ const {
   BOTNAME,
   MOD_LOG_CHANNEL,
   BOT_LOG_CHANNEL,
+  BOT_RATE_LIMIT,
 } = process.env;
 const ROOMS = (process.env.ROCKETCHAT_ROOM || "general")
   .split(",")
@@ -41,6 +42,8 @@ export const BOT: BotInt = {
   modRoles: process.env.ROLE_LIST?.split(",").map((el) => el.trim()) || [
     "none",
   ],
+  botRateLimit: parseInt(BOT_RATE_LIMIT || "10"),
+  lastCommandCalled: 0,
 };
 
 /**
