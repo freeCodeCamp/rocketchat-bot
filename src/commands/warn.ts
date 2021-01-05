@@ -35,7 +35,11 @@ export const warn: CommandInt = {
       }
 
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const [target, ...reasonArgs] = message.msg!.split(" ").slice(2);
+      const [username, ...reasonArgs] = message.msg!.split(" ").slice(2);
+
+      const target = username.startsWith("@")
+        ? username.substring(1)
+        : username;
 
       const isTargetMod = await isModerator(target, BOT);
 

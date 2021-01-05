@@ -26,6 +26,7 @@ You'll need to set up a few environment variables. Copy the `sample.env` file to
 - `BOT_LOG_CHANNEL`: The name of the channel where the bot should log online notices and error messages.
 - `PREFIX`: The string to call bot commands with. Messages that do not start with this string will be ignored.
 - `ROCKETCHAT_ROOM`: A comma separated list of the rooms the bot should join on login.
+- `BOT_RATE_LIMIT`: The number of seconds the bot should wait between allowing command calls.
 
 ## Running the Bot
 

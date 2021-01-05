@@ -7,4 +7,6 @@ export interface BotInt {
   version: string;
   prefix: string;
   modRoles: string[];
+  botRateLimit: number;
+  lastCommandCalled: number;
 }
