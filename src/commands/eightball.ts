@@ -45,7 +45,7 @@ export const eightball: CommandInt = {
         return;
       }
 
-      const response = `*Question:* ${question.join(" ")}\n*Response:*${
+      const response = `*Question:* ${question.join(" ")}\n*Response:* ${
         options[randomIndex]
       }`;
       await driver.sendToRoom(response, room);
