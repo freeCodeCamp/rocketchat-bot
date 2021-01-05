@@ -1,5 +1,6 @@
 import { driver } from "@rocket.chat/sdk";
 import { BOT } from "..";
+import { logBotMessage } from "../helpers/botLogging";
 import { MessageInt } from "../interfaces/messageInt";
 import { CommandList } from "./_CommandList";
 
@@ -52,6 +53,10 @@ export const CommandHandler = async (
     for (const Command of CommandList) {
       if (commandName === Command.name) {
         await Command.command(message, roomName, BOT);
+        await logBotMessage(
+          `${message.u.username} called the ${commandName} command in ${roomName}.`,
+          BOT
+        );
         return;
       }
     }
