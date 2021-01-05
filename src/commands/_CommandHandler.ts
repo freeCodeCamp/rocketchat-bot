@@ -1,6 +1,6 @@
 import { driver } from "@rocket.chat/sdk";
-import { IMessage } from "@rocket.chat/sdk/dist/config/messageInterfaces";
 import { BOT } from "..";
+import { MessageInt } from "../interfaces/messageInt";
 import { CommandList } from "./_CommandList";
 
 /**
@@ -14,16 +14,26 @@ import { CommandList } from "./_CommandList";
  */
 export const CommandHandler = async (
   err: unknown,
-  messages: IMessage[]
+  messages: MessageInt[]
 ): Promise<void> => {
   if (err) {
     console.error(err);
     return;
   }
   const message = messages[0];
+
   if (!message.u || message.u._id === BOT.botId) {
     return;
   }
+
+  if (message.replies) {
+    return;
+  }
+
+  if (message.editedBy || message.editedAt) {
+    return;
+  }
+
   if (!message.msg) {
     console.error("Message empty??");
     return;
