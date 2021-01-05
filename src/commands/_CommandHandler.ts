@@ -22,6 +22,8 @@ export const CommandHandler = async (
   }
   const message = messages[0];
 
+  console.log(message);
+
   if (!message.u || message.u._id === BOT.botId) {
     return;
   }

@@ -29,7 +29,12 @@ export const rescind: CommandInt = {
         return;
       }
 
-      const [target] = message.msg.split(" ").slice(2);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const [username] = message.msg!.split(" ").slice(2);
+
+      const target = username.startsWith("@")
+        ? username.substring(1)
+        : username;
 
       if (!target) {
         await driver.sendToRoom(

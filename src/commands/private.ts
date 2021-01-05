@@ -37,7 +37,11 @@ export const priv: CommandInt = {
       }
 
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const target = message.msg!.split(" ").slice(2);
+      const [username] = message.msg!.split(" ").slice(2);
+
+      const target = username.startsWith("@")
+        ? username.substring(1)
+        : username;
 
       if (!target) {
         await driver.sendToRoom(

@@ -33,7 +33,12 @@ export const add: CommandInt = {
         return;
       }
 
-      const [target] = message.msg.split(" ").slice(2);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const [username] = message.msg!.split(" ").slice(2);
+
+      const target = username.startsWith("@")
+        ? username.substring(1)
+        : username;
 
       const userInfoRequest: UserInfoInt = await api.get("users.info", {
         username: target,

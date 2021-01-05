@@ -23,7 +23,12 @@ export const kick: CommandInt = {
         return;
       }
 
-      const [target, ...reasonArgs] = message.msg.split(" ").slice(2);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const [username, ...reasonArgs] = message.msg!.split(" ").slice(2);
+
+      const target = username.startsWith("@")
+        ? username.substring(1)
+        : username;
 
       const reason = reasonArgs.join(" ");
 
