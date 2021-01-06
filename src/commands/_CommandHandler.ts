@@ -55,7 +55,9 @@ export const CommandHandler = async (
     console.log(timeSinceLastCommand);
     if (timeSinceLastCommand < BOT.botRateLimit * 1000) {
       await driver.sendToRoom(
-        `Sorry, but commands are being called too quickly. Please wait ${
+        `Sorry, @${
+          message.u.username
+        }, but commands are being called too quickly. Please wait ${
           BOT.botRateLimit - timeSinceLastCommand / 1000
         } seconds and try again.`,
         roomName
@@ -66,7 +68,7 @@ export const CommandHandler = async (
       if (commandName === Command.name) {
         await Command.command(message, roomName, BOT);
         await logBotMessage(
-          `${message.u.username} called the ${commandName} command in ${roomName}.`,
+          `@${message.u.username} called the \`${commandName}\` command in #${roomName}.`,
           BOT
         );
         BOT.lastCommandCalled = Date.now();
