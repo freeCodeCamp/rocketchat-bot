@@ -68,7 +68,7 @@ export const CommandHandler = async (
       if (commandName === Command.name) {
         await Command.command(message, roomName, BOT);
         await logBotMessage(
-          `${message.u.username} called the ${commandName} command in ${roomName}.`,
+          `@${message.u.username} called the \`${commandName}\` command in #${roomName}.`,
           BOT
         );
         BOT.lastCommandCalled = Date.now();
