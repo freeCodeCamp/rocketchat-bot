@@ -55,7 +55,9 @@ export const CommandHandler = async (
     console.log(timeSinceLastCommand);
     if (timeSinceLastCommand < BOT.botRateLimit * 1000) {
       await driver.sendToRoom(
-        `Sorry, but commands are being called too quickly. Please wait ${
+        `Sorry, @${
+          message.u.username
+        }, but commands are being called too quickly. Please wait ${
           BOT.botRateLimit - timeSinceLastCommand / 1000
         } seconds and try again.`,
         roomName
