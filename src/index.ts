@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import { api, driver } from "@rocket.chat/sdk";
 import { CommandHandler } from "./commands/_CommandHandler";
 import { BotInt } from "./interfaces/BotInt";
+import packageData from "../package.json";
 
 dotenv.config();
 
@@ -35,9 +36,7 @@ export const BOT: BotInt = {
   hostPath: ROCKETCHAT_URL,
   modLogChannel: MOD_LOG_CHANNEL || "",
   botLogChannel: BOT_LOG_CHANNEL || "",
-  version:
-    process.env.HEROKU_RELEASE_VERSION ||
-    "Unknown Heroku release version. Is this a local instance?",
+  version: packageData.version,
   prefix: process.env.PREFIX || "!bot",
   modRoles: process.env.ROLE_LIST?.split(",").map((el) => el.trim()) || [
     "none",

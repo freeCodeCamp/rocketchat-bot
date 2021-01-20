@@ -4,9 +4,10 @@
   "description": "A test repository for building a rocket chat bot\"",
   "main": "./prod/index.ts",
   "scripts": {
+    "prebuild": "rm -rf ./prod",
     "build": "tsc",
     "lint": "eslint ./src/",
-    "start": "node ./prod/index.js"
+    "start": "node ./prod/src/index.js"
   },
   "repository": {
     "type": "git",
