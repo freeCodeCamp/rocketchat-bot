@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { api, driver } from "@rocket.chat/sdk";
+import { api, driver, settings } from "@rocket.chat/sdk";
 import { CommandHandler } from "./commands/_CommandHandler";
 import { BotInt } from "./interfaces/BotInt";
 import packageData from "../package.json";
@@ -50,6 +50,10 @@ export const BOT: BotInt = {
  */
 const runBot = async () => {
   const ssl = process.env.ROCKETCHAT_USE_SSL ? true : false;
+
+  // force lib to use host?
+  settings.host = ROCKETCHAT_URL;
+
   // Connect to server, log in.
   await driver.connect({ host: ROCKETCHAT_URL, useSsl: ssl });
   BOT.botId = await driver.login({
