@@ -1,6 +1,6 @@
 {
   "name": "rocketchat-bot",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "A test repository for building a rocket chat bot\"",
   "main": "./prod/index.ts",
   "scripts": {
