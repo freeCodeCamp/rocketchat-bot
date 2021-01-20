@@ -7,7 +7,7 @@
     "prebuild": "rm -rf ./prod",
     "build": "tsc",
     "lint": "eslint ./src/",
-    "start": "node ./prod/src/index.js"
+    "start": "node -r dotenv/config ./prod/src/index.js"
   },
   "repository": {
     "type": "git",
