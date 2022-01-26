@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@rocket.chat/sdk": "0.2.9-2",
-    "dotenv": "14.3.0"
+    "dotenv": "14.3.2"
   },
   "devDependencies": {
     "@types/node": "16.11.21",
