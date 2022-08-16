@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/nhcarrigan/rocketchat-bot#readme",
   "engines": {
-    "node": "16.16.0",
+    "node": "16.17.0",
     "npm": "8.17.0"
   },
   "dependencies": {
@@ -35,7 +35,7 @@
     "dotenv": "16.0.1"
   },
   "devDependencies": {
-    "@types/node": "16.11.48",
+    "@types/node": "16.11.49",
     "@typescript-eslint/eslint-plugin": "5.33.1",
     "@typescript-eslint/parser": "5.33.1",
     "eslint": "8.22.0",
