@@ -35,7 +35,7 @@
     "dotenv": "16.0.2"
   },
   "devDependencies": {
-    "@types/node": "16.11.56",
+    "@types/node": "16.11.57",
     "@typescript-eslint/eslint-plugin": "5.36.1",
     "@typescript-eslint/parser": "5.36.1",
     "eslint": "8.23.0",
