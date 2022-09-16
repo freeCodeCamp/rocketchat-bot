@@ -28,7 +28,7 @@
   "homepage": "https://github.com/nhcarrigan/rocketchat-bot#readme",
   "engines": {
     "node": "16.17.0",
-    "npm": "8.19.1"
+    "npm": "8.19.2"
   },
   "dependencies": {
     "@rocket.chat/sdk": "0.2.9-2",
